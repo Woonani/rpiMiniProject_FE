@@ -72,6 +72,7 @@
 </template>
 <script>
 import axios from 'axios'
+import store from '@/api'
 
 import Validate from '@/mixins/Validate.vue'
 
@@ -100,11 +101,20 @@ export default {
 			// console.log('/index/login - axiosBody : ', axiosBody)
 
 			await axios
-				.post(process.env.VUE_APP_URL + '/login', axiosBody)
-
+				.post(process.env.VUE_APP_API + '/login', axiosBody)
 				.then(async response => {
-					console.log('로그인 - response : ', response)
-					console.log('로그인 - response.statusText : ', response.statusText)
+					// localStorage.setItem('token', JSON.parse(response.config.data))
+					// console.log(response)
+					localStorage.setItem('token', JSON.parse(response.config.data).userid)
+
+					// console.log('2로그인 - response.statusText : ', response.statusText)
+					// console.log('토큰확인1 : ', JSON.parse(response.config.data))
+					console.log('localStorage.token : ', localStorage.token)
+					console.log('response 확인할꾜 : ', response)
+
+					// this.$store.dispatch('User', JSON.parse(response.config.data).userid)
+					this.$store.dispatch('actUserInfo', response.data.data.id)
+
 					if (response.statusText == 'OK') {
 						this.$router.push('/')
 					}

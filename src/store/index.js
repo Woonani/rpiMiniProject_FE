@@ -19,5 +19,16 @@ export default new Vuex.Store({
 		setUser(state, data) {
 			state.User = data
 		},
-	}, //치면 오류남
+	},
+	actions: {
+		// 유저정보 불러주는 비동기함수
+		actUserInfo(context, payload) {
+			// console.log('actUserInfo', payload)
+
+			const data = {
+				id: payload.id,
+			}
+			context.commit('setUser', data)
+		},
+	},
 })
