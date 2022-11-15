@@ -8,16 +8,16 @@ export default new Vuex.Store({
 	plugins: [createPersistedState()],
 	modules: {},
 	state: {
-		user: null,
-	},
-	getters: {
-		user: state => {
-			return state.user
+		User: {
+			id: 0,
 		},
 	},
+	getters: {
+		User: state => state.User,
+	},
 	mutations: {
-		setuser(state, data) {
-			state.user = data
+		setUser(state, data) {
+			state.User = data
 		},
 	}, //치면 오류남
 })
