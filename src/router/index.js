@@ -8,40 +8,16 @@ const routes = [
 	{
 		path: '/',
 		name: 'home',
-		beforeEnter: (to, from, next) => {
-			console.log('to: ', to, 'from: ', from)
-			if (localStorage.getItem('token')) {
-				next()
-			} else {
-				next('/signin')
-			}
-		},
 		component: HomeView,
 	},
 	{
 		path: '/signin',
 		name: 'signin',
-		beforeEnter: (to, from, next) => {
-			console.log('to: ', to, 'from: ', from)
-			if (localStorage.getItem('token')) {
-				next('/')
-			} else {
-				next()
-			}
-		},
 		component: () => import('../views/Auth/SigninView.vue'),
 	},
 	{
 		path: '/signup',
 		name: 'signup',
-		beforeEnter: (to, from, next) => {
-			console.log('to: ', to, 'from: ', from)
-			if (localStorage.getItem('token')) {
-				next('/')
-			} else {
-				next()
-			}
-		},
 		component: () => import('../views/Auth/SignupView.vue'),
 	},
 ]

@@ -47,7 +47,7 @@
 										:error-messages="errors"
 									></v-text-field>
 								</ValidationProvider>
-								<ValidationProvider
+								<!-- <ValidationProvider
 									v-slot="{ errors }"
 									name="비밀번호 확인"
 									rules="required|confirmed:비밀번호"
@@ -61,22 +61,8 @@
 										placeholder="위 입력한 비밀번호와 동일하게 입력"
 										:error-messages="errors"
 									></v-text-field>
-								</ValidationProvider>
-								<ValidationProvider
-									v-slot="{ errors }"
-									name="이름"
-									rules="required"
-								>
-									<v-text-field
-										v-model="userName"
-										outlined
-										maxlength="3"
-										label="이름"
-										color="#aed581"
-										placeholder="이름"
-										:error-messages="errors"
-									></v-text-field>
-								</ValidationProvider>
+								</ValidationProvider> -->
+
 								<v-btn text color="primary" class="pl-0" @click="goSignIn"
 									>돌아가기</v-btn
 								>
@@ -113,8 +99,6 @@ export default {
 		return {
 			email: '',
 			password: '',
-			userName: '',
-			confirmPassword: '',
 			loading: false,
 			errorMessage: '',
 		}
@@ -128,19 +112,18 @@ export default {
 			this.loading = true
 
 			const axiosBody = {
-				email: this.email,
+				userid: this.email,
 				password: this.password,
-				name: this.userName,
 			}
 			console.log('회원가입 axiosBody : ', axiosBody)
 
 			await axios
-				.post(process.env.VUE_APP_URL + '/auth/join', axiosBody)
-				.then(async response => {
-					console.log('회원가입 response : ', response)
+				.post(process.env.VUE_APP_API + '/auth/join', axiosBody)
+				.then(response => {
+					console.log('회원가입 response : ', response, response.data)
 					// localStorage.setItem('token', response.data.token)
 
-					this.$router.push('/signin')
+					// this.$router.push('/signin')
 				})
 				.catch(error => {
 					console.log('회원가입 error : ', error)

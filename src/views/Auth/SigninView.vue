@@ -1,15 +1,15 @@
 <template>
-	<v-container fluid class="fill-height white">
+	<v-container fluid class="fill-height #C5E1A">
 		<v-row>
 			<v-col cols="12" xs="12" sm="6" md="5" lg="4" class="ma-auto">
 				<img
 					class="logoimg"
-					src="../../assets/images/main2.png"
+					src="../../assets/images/cham2.png"
 					alt="logoimage"
 				/>
 				<br />
 				<v-card class="pa-10">
-					<v-card-title>charmX3</v-card-title>
+					<v-card-title>로그인하고 사진과 랭킹 조회하세요!</v-card-title>
 					<v-card-subtitle>로그인</v-card-subtitle>
 					<v-card-text>
 						<ValidationObserver
@@ -89,52 +89,58 @@ export default {
 	methods: {
 		//로그인
 		async signIn() {
-			if (this.loading) return
-			this.loading = true
+			if (this.loading) {
+				return (this.loading = true)
+			}
 
 			const axiosBody = {
-				email: this.email,
+				userid: this.email,
 				password: this.password,
 			}
-			console.log('auth/login - axiosBody : ', axiosBody)
+			console.log('/index/login - axiosBody : ', axiosBody)
 
 			await axios
-				.post(process.env.VUE_APP_URL + '/auth/login', axiosBody)
+				.post(process.env.VUE_APP_URL + '/index/login', axiosBody)
+				// .post(process.env.VUE_APP_URL + '//login', axiosBody)
+
 				.then(async response => {
-					console.log('auth/login - response : ', response)
-					localStorage.setItem('token', response.data.token)
-					localStorage.setItem('userId', this.email)
+					console.log('로그인 - response : ', response)
+					// localStorage.setItem('token', response.data.token)
+					// localStorage.setItem('userId', this.email)
 
 					// 로컬 스토리지에 유저 정보 저장
-					//   await axios
-					//     .post(
-					//       process.env.VUE_APP_URL + '/auth/login/me',
-					//       {},
-					//       {
-					//         headers: {
-					//           Authorization: `Bearer ${response.data.token}`
-					//         }
-					//       }
-					//     )
-					//     .then(_response => {
-					//       // localStorage.setItem('user', JSON.stringify(_response.data.data))
-					//       console.log('_response.data.data : ', _response.data.data)
-					//       this.$store.dispatch('actUserInfo', _response.data.data)
-					//       this.$router.push('/')
-					//       console.log('this.$store.getters.User : ', this.$store.getters.User)
-					//     })
-					//     .catch(_error => {
-					//       console.log('/auth/login/me - _error : ', _error)
+					// await axios
+					// 	.post(
+					// 		//   process.env.VUE_APP_URL + '/auth/login/me',
+					// 		//   {},
+					// 		{
+					// 			headers: {
+					// 				Authorization: `Bearer ${response.data.token}`,
+					// 			},
+					// 		},
+					// 	)
+					// 	.then(_response => {
+					// 		// localStorage.setItem('user', JSON.stringify(_response.data.data))
+					// 		console.log('_response.data.data : ', _response.data.data)
+					// 		this.$store.dispatch('actUserInfo', _response.data.data)
+					// 		this.$router.push('/')
+					// 		console.log(
+					// 			'this.$store.getters.User : ',
+					// 			this.$store.getters.User,
+					// 		)
+					// 	})
+					// 	.catch(_error => {
+					// 		console.log('/login - _error : ', _error)
 
-					//   // 에러문구 표시
-					//   this.$refs.signInForm.setErrors({
-					//     이메일: ['이메일을 확인해주세요.'],
-					//     비밀번호: ['비밀번호를 확인해주세요.']
-					//   })
-					//   this.errorMessage = '로그인 실패하였습니다.'
+					// 		// 에러문구 표시
+					// 		this.$refs.signInForm.setErrors({
+					// 			이메일: ['이메일을 확인해주세요.'],
+					// 			비밀번호: ['비밀번호를 확인해주세요.'],
+					// 		})
+					// 		this.errorMessage = '로그인 실패하였습니다.'
 
-					//   this.loading = false
-					// })
+					// 		this.loading = false
+					// 	})
 				})
 				.catch(error => {
 					console.log('login - error : ', error)
