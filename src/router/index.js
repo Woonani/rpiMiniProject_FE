@@ -20,6 +20,26 @@ const routes = [
 		name: 'signup',
 		component: () => import('../views/Auth/SignupView.vue'),
 	},
+	{
+		path: '/codeinput',
+		name: 'codeInput',
+		component: () => import('../views/codeInput.vue'),
+	},
+	{
+		path: '/ranking',
+		name: 'ranking',
+		component: () => import('../views/ranking.vue'),
+	},
+	{
+		path: '/photoalbum',
+		name: 'photoAlbum',
+		component: () => import('../views/photoAlbum.vue'),
+	},
+	{
+		path: '*',
+		name: 'NotFound',
+		component: () => import('../views/NotFoundPage.vue'),
+	},
 ]
 
 const router = new VueRouter({
