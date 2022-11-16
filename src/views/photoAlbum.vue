@@ -1,10 +1,21 @@
 <template>
 	<div class="backBox">
 		박스박스박스박스박스박스박스박스박스박스박스박스박스박스박스
-		<v-spacer> </v-spacer>
+
+		<div class="headText">
+			<v-spacer> THE </v-spacer>
+			<v-spacer> CHAM </v-spacer>
+			<v-spacer> CHAM </v-spacer>
+			<v-spacer> CHAM </v-spacer>
+			<v-spacer> PHOTO HISTORY </v-spacer>
+		</div>
+
 		<div class="flexContainer">
 			<v-card v-for="(photo, i) in photoes" :key="i" class="photoBox">
 				<span>{{ photo }}</span>
+				<!-- <v-avatar size="200" class="photoImg">
+					<img :src="`${url}/main/uploads/${this.photo}`" />
+				</v-avatar> -->
 				<!-- <div :class="student.genderImg">
 				<div class="nameBox">
 					<span text style="font-size: 1.5em">{{ student.stuName }}</span>
@@ -17,6 +28,7 @@
 				</div>-->
 			</v-card>
 		</div>
+		<div class="footer"><p>CHAM X CHAM X CHAM © 2022</p></div>
 	</div>
 </template>
 
@@ -27,14 +39,19 @@ export default {
 	data: () => ({
 		photoes: [],
 		userid: '',
+		photoUrl: '',
 		//전체사진가져오기
 	}),
-	computed: {},
+	computed: {
+		url() {
+			return process.env.VUE_APP_API
+		},
+	},
 	mounted() {
-		this.getPhotos()
+		this.getPhotoes()
 	},
 	methods: {
-		async getPhotos() {
+		async getPhotoes() {
 			// const userid = localStorage.token
 			const axiosBody = {
 				userid: localStorage.token,
@@ -110,11 +127,16 @@ export default {
 <style>
 .flexContainer {
 	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	/* flex-direction: row;
+	flex-grow: 1;
+	flex-wrap: wrap; */
 	width: 100%;
-	height: 95%;
-	background-color: rgba(226, 127, 237, 0.525);
+	height: 600px;
+	background-color: rgba(179, 179, 179, 0.525);
+	padding-left: 30px;
+	padding-right: 30px;
 }
 .photoBox {
 	/* display: grid;
@@ -122,14 +144,14 @@ export default {
 	grid-template-rows: 50% 50%;
 	overflow: auto;
 	font-family: 'Noto Serif', serif;*/
-	background-color: rgba(226, 127, 237, 0.525);
+	background-color: rgba(209, 209, 209, 0.525);
 	align-items: center;
 	border: 1px solid black;
 	border-radius: 10px;
 	box-sizing: border-box;
 	column-gap: 10px;
-	width: 400px;
-	height: 400px;
+	width: 350px;
+	height: 350px;
 	/* display: flex;
 	flex-direction: column;
 	justify-content: center; */
@@ -138,5 +160,21 @@ export default {
 .backBox {
 	width: 100%;
 	height: 95%;
+}
+.headText {
+	font-size: xx-large;
+	color: aliceblue;
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.footer {
+	height: 130px;
+	width: 100%;
+	background-color: rgba(95, 253, 121, 0.317);
+	color: white;
+	font-size: 20px;
+	text-align: center;
+	padding-top: 45px;
 }
 </style>
